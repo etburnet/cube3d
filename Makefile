@@ -6,13 +6,13 @@
 #    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 16:35:33 by opdi-bia          #+#    #+#              #
-#    Updated: 2025/03/20 14:33:20 by eburnet          ###   ########.fr        #
+#    Updated: 2025/03/21 14:27:35 by eburnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d
 CFLAGS = -Wall -Wextra -Werror -g3
-SRCS = main.c cube.c
+SRCS = main.c raycast.c mooves_draw.c utils.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 HEADERS = cube.h

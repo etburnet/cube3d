@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:48:14 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/20 16:24:20 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/03/21 14:27:16 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef struct s_texture
 
 typedef struct s_mooves
 {
-	int	w;
-	int	s;
-	int a;
-	int d;
-	int l_arrow;	
-	int r_arrow;
+	int			w;
+	int			s;
+	int			a;
+	int			d;
+	int			l_arrow;
+	int			r_arrow;
 }				t_mooves;
 
 typedef struct s_data
@@ -92,5 +92,13 @@ typedef struct s_data
 }				t_data;
 
 int				ft_raycast(t_data *data);
-
+void			ft_dist_draw_points(t_data *d, int x);
+void			ft_draw(t_data *d, int line_height, int x);
+void			ft_put_buff(t_data *d, int line_height, int x, int tex_x);
+void			ft_find_wall(t_data *d);
+void			ft_init_raycast(t_data *d, int x);
+void			ft_init_side_dist(t_data *d);
+void			free_map(int **tab, int len);
+int				ft_x_close(t_data *data);
+int				ft_error(char *str);
 #endif
