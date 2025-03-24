@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:18:07 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/21 14:33:43 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/03/24 11:49:36 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_init_raycast(t_data *d, int x)
 	d->ray_dir_y = d->dir_y + d->plane_y * d->cam_x;
 	d->map_x = (int)d->pos_x;
 	d->map_y = (int)d->pos_y;
-
 	if (d->ray_dir_x == 0)
 		d->delta_dist_x = 1e30;
 	else
@@ -72,7 +71,6 @@ void	ft_find_wall(t_data *d)
 			d->map_y += d->step_y;
 			d->side = 1;
 		}
-
 		if (d->map[d->map_x][d->map_y] >= 1)
 			d->hit = 1;
 	}
@@ -93,10 +91,10 @@ void	ft_dist_draw_points(t_data *d, int x)
 	d->draw_end = line_height / 2 + d->screen_height / 2;
 	if (d->draw_end >= d->screen_height)
 		d->draw_end = d->screen_height - 1;
-	ft_draw(d, line_height, x);
+	ft_wall(d, line_height, x);
 }
 
-void	ft_draw(t_data *d, int line_height, int x)
+void	ft_wall(t_data *d, int line_height, int x)
 {
 	double	wall_x;
 	int		tex_x;
@@ -105,8 +103,8 @@ void	ft_draw(t_data *d, int line_height, int x)
 		wall_x = d->pos_y + d->perp_wall_dist * d->ray_dir_y;
 	else
 		wall_x = d->pos_x + d->perp_wall_dist * d->ray_dir_x;
-	wall_x -= floor((wall_x));
-	tex_x = (int)((wall_x) * (double)d->tex_width);
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * (double)d->tex_width);
 	if ((d->side == 0 && d->ray_dir_x > 0) || (d->side == 1
 			&& d->ray_dir_y < 0))
 		tex_x = d->tex_width - tex_x - 1;
@@ -115,22 +113,22 @@ void	ft_draw(t_data *d, int line_height, int x)
 
 void	ft_put_buff(t_data *d, int line_height, int x, int tex_x)
 {
-	int		tex_num;
+	int		tex_id;
 	int		y;
 	double	step;
 	int		tex_y;
 	double	tex_pos;
 
-	tex_num = d->map[d->map_x][d->map_y] - 1;
+	tex_id = ft_textures(d);
 	step = 1.0 * d->tex_height / line_height;
-	tex_pos = (d->draw_start - d->screen_height + line_height / 2) * step;
+	tex_pos = (d->draw_start - d->screen_height / 2 + line_height / 2) * step;
 	y = d->draw_start;
 	while (y < d->draw_end)
 	{
 		tex_y = (int)tex_pos & (d->tex_height - 1);
 		tex_pos += step;
 		d->addr[y * (d->line_length / 4)
-			+ x] = d->textures[tex_num].pixels[tex_y * (d->tex_width) + tex_x];
+			+ x] = d->textures[tex_id].pixels[tex_y * (d->tex_width) + tex_x];
 		y++;
 	}
 }

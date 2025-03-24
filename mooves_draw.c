@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:18:10 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/21 14:12:01 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:46:58 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,28 @@ void	ft_rotate(t_data *d)
 		d->plane_x = d->plane_x * cos(-rot_speed) - d->plane_y * sin(-rot_speed);
 		d->plane_y = old_plane_x * sin(-rot_speed) + d->plane_y * cos(-rot_speed);
 	}
+}
+
+int	ft_textures(t_data *d)
+{
+	int tex_id;
+
+	tex_id = 0;
+	if (d->side == 1)
+	{
+		if (d->step_y == -1)
+			tex_id = 1;
+		else if (d->step_y == 1)
+			tex_id = 0;
+	}	
+	else 
+	{
+		if (d->step_x == -1)
+			tex_id = 3;
+		else if (d->step_x == 1)
+			tex_id = 2;
+	}
+	return (tex_id);
 }
 
 int	ft_raycast(t_data *d)
