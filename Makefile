@@ -6,34 +6,41 @@
 #    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 16:35:33 by opdi-bia          #+#    #+#              #
-#    Updated: 2025/03/21 14:27:35 by eburnet          ###   ########.fr        #
+#    Updated: 2025/03/28 14:39:02 by eburnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cube3d
 CFLAGS = -Wall -Wextra -Werror -g3
-SRCS = main.c raycast.c mooves_draw.c utils.c
+SRCS = main.c\
+	raycast.c\
+	mooves.c draw.c\
+	utils.c ft_strtrim.c\
+	get_next_line_utils.c\
+	get_next_line.c\
+	parsing.c\
+	read_map.c\
+	textures.c\
+	map_utils.c\
+	colors.c\
+	utils_parsing.c\
+
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 HEADERS = cube.h
-LIBFT_PATH = ./libft
 MLX_PATH = ./minilibx-linux
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_PATH)/libft.a $(MLX_PATH)/libmlx.a
+$(NAME): $(OBJS) $(MLX_PATH)/libmlx.a
 	@echo "Linking $@..."
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(MLX_PATH) -lmlx -L/usr/lib -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "Executable $(NAME) created."
 	
 %.o: %.c $(HEADERS)
 	@$(CC) $(CFLAGS) -I $(MLX_PATH) -O3 -c $< -o $@ >/dev/null
-
-$(LIBFT_PATH)/libft.a:
-	@echo "Building libft..."
-	@make -C $(LIBFT_PATH) >/dev/null
 	
 $(MLX_PATH)/libmlx.a:
 	@echo "Building MiniLibX..."
@@ -42,7 +49,6 @@ $(MLX_PATH)/libmlx.a:
 clean :
 	@echo "Cleaning object files..."
 	@rm -f $(OBJS)
-	@make -C $(LIBFT_PATH) clean >/dev/null
 	@make -C $(MLX_PATH) clean >/dev/null
 	@echo "Solong cleaned."
 
@@ -50,7 +56,6 @@ fclean :
 	@echo "Cleaning all generated files..."
 	@rm -f $(OBJS)
 	@rm -f $(NAME)
-	@make -C $(LIBFT_PATH) fclean >/dev/null
 	@make -C $(MLX_PATH) clean >/dev/null
 	@echo "Solong Fcleaned."
 

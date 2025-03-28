@@ -6,29 +6,11 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:18:07 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/24 11:49:36 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/03/28 16:36:59 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	ft_init_raycast(t_data *d, int x)
-{
-	d->cam_x = 2 * x / (double)d->screen_width - 1;
-	d->ray_dir_x = d->dir_x + d->plane_x * d->cam_x;
-	d->ray_dir_y = d->dir_y + d->plane_y * d->cam_x;
-	d->map_x = (int)d->pos_x;
-	d->map_y = (int)d->pos_y;
-	if (d->ray_dir_x == 0)
-		d->delta_dist_x = 1e30;
-	else
-		d->delta_dist_x = fabs(1 / d->ray_dir_x);
-	if (d->ray_dir_y == 0)
-		d->delta_dist_y = 1e30;
-	else
-		d->delta_dist_y = fabs(1 / d->ray_dir_y);
-	ft_init_side_dist(d);
-}
 
 void	ft_init_side_dist(t_data *d)
 {
@@ -75,6 +57,7 @@ void	ft_find_wall(t_data *d)
 			d->hit = 1;
 	}
 }
+
 
 void	ft_dist_draw_points(t_data *d, int x)
 {
@@ -127,8 +110,8 @@ void	ft_put_buff(t_data *d, int line_height, int x, int tex_x)
 	{
 		tex_y = (int)tex_pos & (d->tex_height - 1);
 		tex_pos += step;
-		d->addr[y * (d->line_length / 4)
-			+ x] = d->textures[tex_id].pixels[tex_y * (d->tex_width) + tex_x];
+		d->addr[y * (d->line_length / 4) + x] = d->textures[tex_id].pixels[tex_y
+			* (d->tex_width) + tex_x];
 		y++;
 	}
 }

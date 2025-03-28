@@ -6,18 +6,25 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:48:14 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/24 11:25:41 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/03/28 14:50:15 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
-# include "./libft/libft.h"
+# include <ctype.h>
+# include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_texture
 {
@@ -25,6 +32,7 @@ typedef struct s_texture
 	int			bpp;
 	int			line_length;
 	int			endian;
+	void		*tex;
 }				t_texture;
 
 typedef struct s_mooves
@@ -44,10 +52,6 @@ typedef struct s_data
 	int			map_height;
 	int			floor_color[3];
 	int			ceiling_color[3];
-	void		*no_texture;
-	void		*so_texture;
-	void		*we_texture;
-	void		*ea_texture;
 	int			tex_width;
 	int			tex_height;
 	t_texture	textures[4];
@@ -64,6 +68,7 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 
+	char		pos_depart;
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
@@ -89,6 +94,9 @@ typedef struct s_data
 	int			draw_start;
 	int			draw_end;
 
+	int			floor_color_set;
+	int			ceiling_color_set;
+
 }				t_data;
 
 int				ft_raycast(t_data *data);
@@ -102,4 +110,45 @@ void			free_map(int **tab, int len);
 int				ft_x_close(t_data *data);
 int				ft_error(char *str);
 int				ft_textures(t_data *d);
+unsigned long	create_rgb(int r, int g, int b);
+void			ft_rotate(t_data *d);
+void			ft_av_ar(t_data *d);
+void			ft_ga_dr(t_data *d);
+int				ft_key_release(int keycode, t_data *d);
+int				ft_key_press(int keycode, t_data *d);
+
+int				validate_characters(char *line);
+void			fill_short_lines(t_data *data);
+int				is_map_closed(t_data *data);
+
+char			*get_next_line(int fd);
+
+char			*get_next_line(int fd);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strchr(const char *str, int c);
+char			*ft_strtrim(char const *s1, char const *set);
+char			*ft_strdup(const char *s);
+int				ft_atoi(const char *str);
+int				ft_isdigit(int c);
+int				ft_cub(const char *str, t_data *data);
+void			ft_parsing(const char *str, t_data *data);
+void			get_map(int fd, t_data *data, char *first_line);
+int				parse_texture(char *line, t_data *data);
+int				set_color(t_data *data, const char *line);
+int				parse_color(const char *color_str, int *color);
+int				assign_texture(char *line, char *path, t_data *data);
+int				extract_rgb(const char *color_str, int *values);
+int				count_commas(const char *str);
+int				validate_component(int component);
+int				extract_value(const char **str);
+int				is_valid_texture(char *line, char *id);
+int				ft_strchr_index(const char *str, char c);
+char			*ft_strrjoin(char const *s1, char const *s2);
+
+int				ft_atoi(const char *str);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			ft_putstr_fd(char *s, int fd);
+int				ft_strlen(const char *str);
+char			*ft_substr(char const *s, int start, int len);
+
 #endif
