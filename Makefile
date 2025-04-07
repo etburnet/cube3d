@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
+#    By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 16:35:33 by opdi-bia          #+#    #+#              #
-#    Updated: 2025/03/28 14:39:02 by eburnet          ###   ########.fr        #
+#    Updated: 2025/04/07 15:55:28 by samraoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,28 @@ NAME = cube3d
 CFLAGS = -Wall -Wextra -Werror -g3
 SRCS = main.c\
 	raycast.c\
-	mooves.c draw.c\
+	mooves.c\
+	draw.c\
 	utils.c ft_strtrim.c\
 	get_next_line_utils.c\
 	get_next_line.c\
 	parsing.c\
+	parsing2.c\
+	parsing3.c\
+	parsing4.c\
 	read_map.c\
+	read_map2.c\
+	read_map3.c\
 	textures.c\
 	map_utils.c\
 	colors.c\
+	colors_utils.c\
+	colors_utils2.c\
 	utils_parsing.c\
+	map_utils2.c\
+	map_utils3.c\
+	map_utils4.c\
+	map_utils5.c\
 
 OBJS = $(SRCS:.c=.o)
 CC = gcc

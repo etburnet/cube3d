@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:26:20 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/28 14:04:14 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:03:57 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	free_map(int **tab, int len)
 int	ft_x_close(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_image(data->mlx, data->textures[0].tex);
-	mlx_destroy_image(data->mlx, data->textures[1].tex);
-	mlx_destroy_image(data->mlx, data->textures[2].tex);
-	mlx_destroy_image(data->mlx, data->textures[3].tex);
+	mlx_destroy_image(data->mlx, data->texs[0].tex);
+	mlx_destroy_image(data->mlx, data->texs[1].tex);
+	mlx_destroy_image(data->mlx, data->texs[2].tex);
+	mlx_destroy_image(data->mlx, data->texs[3].tex);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	free_map(data->map, data->map_height);
+	free_map(data->map, data->map_width);
 	exit(0);
 	return (0);
 }
@@ -68,17 +68,4 @@ void	ft_init_raycast(t_data *d, int x)
 	else
 		d->delta_dist_y = fabs(1 / d->ray_dir_y);
 	ft_init_side_dist(d);
-}
-
-int ft_strchr_index(const char *str, char c)
-{
-    int i = 0;
-    
-    while (str[i])
-    {
-        if (str[i] == c)
-            return i;
-        i++;
-    }
-    return -1; // Caractère non trouvé
 }

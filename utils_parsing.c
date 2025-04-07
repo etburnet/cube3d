@@ -3,37 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:28:35 by doom              #+#    #+#             */
-/*   Updated: 2025/03/28 14:40:13 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:58:49 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int ft_atoi(const char *str)
+int	is_valid_texture(char *line, char *id)
 {
-    int result = 0;
-    int sign = 1;
+	int	i;
+	int	j;
 
-    while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
-        str++;
-
-    if (*str == '-' || *str == '+')
+	i = 0;
+	while (line && line[i] && line[i] == ' ')
+		i++;
+	j = 0;
+	while (id[j])
 	{
-        if (*str == '-')
-            sign = -1;
-        str++;
-    }
+		if (line[i] != id[j])
+			return (0);
+		i++;
+		j++;
+	}
+	return (line[i] == ' ');
+}
 
-    while (ft_isdigit(*str))
+int	ft_atoi(const char *str)
+{
+	int	result;
+	int	sign;
+
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-        result = result * 10 + (*str - '0');
-        str++;
-    }
-
-    return (result * sign);
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (result * sign);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -44,13 +62,13 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (s1[i] && s1[i] == s2[i] && i < n)
 		i++;
 	if (i < n)
-		return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	return (0);
 }
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int		i;
+	int	i;
 
 	if (!s)
 		return ;
@@ -73,4 +91,3 @@ int	ft_strlen(const char *str)
 	}
 	return (len);
 }
-

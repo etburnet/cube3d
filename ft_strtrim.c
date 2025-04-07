@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 15:39:23 by doom              #+#    #+#             */
-/*   Updated: 2025/03/28 16:29:25 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:06:27 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_strlcpy(char *dest, const char *src, int size)
 char	*ft_strdup(const char *s)
 {
 	char	*dup;
-	int	size;
+	int		size;
 
 	size = ft_strlen(s) + 1;
 	dup = malloc(size);

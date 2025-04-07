@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:18:07 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/28 16:36:59 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:03:57 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_find_wall(t_data *d)
 			d->hit = 1;
 	}
 }
-
 
 void	ft_dist_draw_points(t_data *d, int x)
 {
@@ -110,7 +109,7 @@ void	ft_put_buff(t_data *d, int line_height, int x, int tex_x)
 	{
 		tex_y = (int)tex_pos & (d->tex_height - 1);
 		tex_pos += step;
-		d->addr[y * (d->line_length / 4) + x] = d->textures[tex_id].pixels[tex_y
+		d->addr[y * (d->line_length / 4) + x] = d->texs[tex_id].pixels[tex_y
 			* (d->tex_width) + tex_x];
 		y++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:51:50 by samraoui          #+#    #+#             */
-/*   Updated: 2025/03/28 14:49:54 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:57:10 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ char	*ft_substr(char const *s, int start, int len)
 {
 	char	*substr;
 	char	*new_str;
-	int	s_len;
-	int	i;
+	int		s_len;
+	int		i;
 
 	s_len = ft_strlen(s);
 	if (s == NULL || s_len < start)

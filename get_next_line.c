@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 10:51:54 by samraoui          #+#    #+#             */
-/*   Updated: 2025/03/28 13:52:00 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:57:14 by samraoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static char	*function_name(int fd, char *buf, char *backup)
+static char	*read_line(int fd, char *buf, char *backup)
 {
 	int		read_line;
 	char	*char_temp;
@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (0);
-	line = function_name(fd, buf, backup);
+	line = read_line(fd, buf, backup);
 	free(buf);
 	buf = NULL;
 	if (!line)
