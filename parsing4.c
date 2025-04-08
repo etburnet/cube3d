@@ -3,23 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:54:32 by samraoui          #+#    #+#             */
-/*   Updated: 2025/04/07 16:08:47 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:18:25 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	verify_parsing_complete(t_data *data, int map_found)
+int	verify_parsing_complete(t_data *data, int map_found)
 {
-	if (!check_textures_loaded(data))
-		exit(ft_error("Missing texture(s)"));
-	if (!check_colors_loaded(data))
-		exit(ft_error("Missing floor or ceiling color"));
-	if (!map_found)
-		exit(ft_error("No map found in file"));
+	int	i;
+
+	i = 0;
+	if (!check_textures_loaded(data) || !check_colors_loaded(data)
+		|| !map_found)
+	{
+		while (i < 4)
+		{
+			if (data->texs[i].path)
+				free(data->texs[i].path);
+			i++;
+		}
+		return (ft_error("Missing map element"));
+	}
+	return (0);
 }
 
 void	free_temp_map(char **temp_map, int height)

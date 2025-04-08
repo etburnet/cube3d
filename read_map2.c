@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:55:30 by doom              #+#    #+#             */
-/*   Updated: 2025/04/07 14:58:37 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:19:17 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int	convert_char_to_int(char c, t_data *data, int x, int y)
 		return (-3);
 	else if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		set_player_position(data, c, x, y);
-		return (0);
+		if (set_player_position(data, c, x, y) == 1)
+			return (-1);
+		else
+			return (0);
 	}
 	return (-1);
 }
@@ -35,6 +37,7 @@ int	*convert_line_to_int(char *line, int width, t_data *data, int y)
 	int	*line_int;
 	int	i;
 	int	j;
+	int	res;
 
 	line_int = malloc(sizeof(int) * width);
 	if (!line_int)
@@ -43,7 +46,10 @@ int	*convert_line_to_int(char *line, int width, t_data *data, int y)
 	j = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		line_int[j] = convert_char_to_int(line[i], data, j, y);
+		res = convert_char_to_int(line[i], data, j, y);
+		if (res == -1)
+			return (free(line_int), NULL);
+		line_int[j] = res;
 		i++;
 		j++;
 	}
@@ -70,7 +76,7 @@ int	process_first_line(t_data *data, char *first_line, int *i)
 		return (0);
 	}
 	data->map[0] = convert_line_to_int(line, data->map_width, data, 0);
-	if (!data->map[0])
+	if (data->map[0] == NULL)
 	{
 		free(line);
 		free(data->map);

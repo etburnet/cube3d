@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+         #
+#    By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 16:35:33 by opdi-bia          #+#    #+#              #
-#    Updated: 2025/04/07 15:55:28 by samraoui         ###   ########.fr        #
+#    Updated: 2025/04/08 14:22:46 by eburnet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cube3d
+NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror -g3
 SRCS = main.c\
 	raycast.c\
@@ -62,13 +62,13 @@ clean :
 	@echo "Cleaning object files..."
 	@rm -f $(OBJS)
 	@make -C $(MLX_PATH) clean >/dev/null
-	@echo "Solong cleaned."
+	@echo "Cube cleaned."
 
 fclean :
 	@echo "Cleaning all generated files..."
 	@rm -f $(OBJS)
 	@rm -f $(NAME)
 	@make -C $(MLX_PATH) clean >/dev/null
-	@echo "Solong Fcleaned."
+	@echo "Cube Fcleaned."
 
 re : fclean all

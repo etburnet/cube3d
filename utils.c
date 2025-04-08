@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:26:20 by eburnet           #+#    #+#             */
-/*   Updated: 2025/04/07 15:03:57 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:34:50 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,51 @@ void	free_map(int **tab, int len)
 
 int	ft_x_close(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->img);
-	mlx_destroy_image(data->mlx, data->texs[0].tex);
-	mlx_destroy_image(data->mlx, data->texs[1].tex);
-	mlx_destroy_image(data->mlx, data->texs[2].tex);
-	mlx_destroy_image(data->mlx, data->texs[3].tex);
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
+	int	i;
+
+	i = 0;
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	while (i < 4)
+	{
+		if (data->texs[i].tex)
+			mlx_destroy_image(data->mlx, data->texs[i].tex);
+		free(data->texs[i].path);
+		i++;
+	}
+	if (data->mlx_win)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	if (data->mlx)
+		free(data->mlx);
 	free_map(data->map, data->map_width);
 	exit(0);
 	return (0);
+}
+
+void	ft_close(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	while (i < 4)
+	{
+		if (data->texs[i].tex)
+			mlx_destroy_image(data->mlx, data->texs[i].tex);
+		free(data->texs[i].path);
+		i++;
+	}
+	if (data->mlx_win)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	if (data->mlx)
+		free(data->mlx);
+	free_map(data->map, data->map_width);
+	exit(1);
 }
 
 int	ft_error(char *str)
@@ -45,11 +79,6 @@ int	ft_error(char *str)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 	return (1);
-}
-
-unsigned long	create_rgb(int r, int g, int b)
-{
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }
 
 void	ft_init_raycast(t_data *d, int x)

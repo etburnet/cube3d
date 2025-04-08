@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:35:00 by doom              #+#    #+#             */
-/*   Updated: 2025/04/07 15:53:43 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:17:40 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	ft_parsing(const char *fichier, t_data *data)
 {
 	int	fd;
 	int	map_found;
+	int	i;
 
+	i = 0;
 	map_found = 0;
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
@@ -78,10 +80,17 @@ int	ft_parsing(const char *fichier, t_data *data)
 	if (process_file_lines(fd, data, &map_found))
 	{
 		close(fd);
+		while (i < 4)
+		{
+			if (data->texs[i].path)
+				free(data->texs[i].path);
+			i++;
+		}
 		return (1);
 	}
 	close(fd);
-	verify_parsing_complete(data, map_found);
+	if (verify_parsing_complete(data, map_found) == 1)
+		return (1);
 	return (0);
 }
 

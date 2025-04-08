@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 14:13:48 by doom              #+#    #+#             */
-/*   Updated: 2025/04/07 15:03:57 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 10:10:51 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,20 @@ static char	*get_texture_path(char *line)
 
 int	assign_texture(char *line, char *path, t_data *data)
 {
-	if (is_valid_texture(line, "NO") && !data->texs[0].tex)
-		data->texs[0].tex = path;
-	else if (is_valid_texture(line, "SO") && !data->texs[1].tex)
-		data->texs[1].tex = path;
-	else if (is_valid_texture(line, "WE") && !data->texs[3].tex)
-		data->texs[3].tex = path;
-	else if (is_valid_texture(line, "EA") && !data->texs[2].tex)
-		data->texs[2].tex = path;
+	if (is_valid_texture(line, "NO") && !data->texs[0].path)
+		data->texs[0].path = path;
+	else if (is_valid_texture(line, "SO") && !data->texs[1].path)
+		data->texs[1].path = path;
+	else if (is_valid_texture(line, "WE") && !data->texs[3].path)
+		data->texs[3].path = path;
+	else if (is_valid_texture(line, "EA") && !data->texs[2].path)
+		data->texs[2].path = path;
 	else
 	{
 		free(path);
 		return (ft_error("Invalid or duplicate texture identifier"), 0);
 	}
-	return (free(path), 1);
+	return (1);
 }
 
 int	parse_texture(char *line, t_data *data)

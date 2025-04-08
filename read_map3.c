@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:55:40 by doom              #+#    #+#             */
-/*   Updated: 2025/04/07 15:47:52 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:07:06 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	get_map(int fd, t_data *data, char *first_line)
 	if (create_int_map(data, temp_map, max_width))
 	{
 		free_temp_map(temp_map, height);
-		return (ft_error("Map conversion error"), 1);
+		return (1);
 	}
 	free_temp_map(temp_map, height);
 	close(fd);

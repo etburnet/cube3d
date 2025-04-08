@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samraoui <samraoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:48:14 by eburnet           #+#    #+#             */
-/*   Updated: 2025/04/07 16:09:00 by samraoui         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:18:43 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_texture
 	int			line_length;
 	int			endian;
 	void		*tex;
+	char		*path;
+	int			tex_w;
+	int			tex_h;
 }				t_texture;
 
 typedef struct s_mooves
@@ -116,6 +119,8 @@ void			ft_av_ar(t_data *d);
 void			ft_ga_dr(t_data *d);
 int				ft_key_release(int keycode, t_data *d);
 int				ft_key_press(int keycode, t_data *d);
+void			ft_close(t_data *data);
+
 void			fill_short_lines(t_data *data);
 int				is_map_closed(t_data *data);
 char			*get_next_line(int fd);
@@ -153,12 +158,12 @@ int				handle_other_line(int fd);
 int				check_textures_loaded(t_data *data);
 int				check_colors_loaded(t_data *data);
 int				check_config_complete(t_data *data);
-void			verify_parsing_complete(t_data *data, int map_found);
+int				verify_parsing_complete(t_data *data, int map_found);
 int				ft_strlen(const char *str);
 char			*ft_substr(char const *s, int start, int len);
 void			ft_putstr_fd(char *s, int fd);
 int				get_map_width(char *line);
-void			set_player_position(t_data *data, char c, int x, int y);
+int				set_player_position(t_data *data, char c, int x, int y);
 int				convert_char_to_int(char c, t_data *data, int x, int y);
 int				*convert_line_to_int(char *line, int width, t_data *data,
 					int y);
@@ -196,8 +201,8 @@ char			**read_remaining_map_lines(int fd, char **temp_map, int *height,
 void			free_temp_map(char **temp_map, int height);
 int				resize_temp_map(char ***temp_map, int *capacity,
 					int current_size);
-void			verify_parsing_complete(t_data *data, int map_found);
-int				resize_temp_map(char ***temp_map, int *capacity, int current_size);
+int				resize_temp_map(char ***temp_map, int *capacity,
+					int current_size);
 void			free_temp_map(char **temp_map, int height);
 int				handle_map_capacity(char ***temp_map, int *capacity, int i);
 

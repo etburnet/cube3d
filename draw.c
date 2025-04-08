@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 13:18:10 by eburnet           #+#    #+#             */
-/*   Updated: 2025/03/28 13:23:22 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:27:08 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,9 @@ int	ft_raycast(t_data *d)
 	}
 	mlx_put_image_to_window(d->mlx, d->mlx_win, d->img, 0, 0);
 	return (0);
+}
+
+unsigned long	create_rgb(int r, int g, int b)
+{
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
 }

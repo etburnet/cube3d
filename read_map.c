@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 15:50:50 by doom              #+#    #+#             */
-/*   Updated: 2025/04/02 14:40:48 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/08 14:18:35 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	init_direction_e_w(t_data *data, char c)
 	}
 }
 
-void	set_player_position(t_data *data, char c, int x, int y)
+int	set_player_position(t_data *data, char c, int x, int y)
 {
 	if (data->pos_depart != '\0')
-		exit(ft_error("Multiple player spawn points"));
+		return (ft_error("Multiple player spawn points"));
 	data->pos_depart = c;
 	data->pos_x = x + 0.5;
 	data->pos_y = y + 0.5;
@@ -76,4 +76,5 @@ void	set_player_position(t_data *data, char c, int x, int y)
 		init_direction_n_s(data, c);
 	else if (c == 'E' || c == 'W')
 		init_direction_e_w(data, c);
+	return (0);
 }
