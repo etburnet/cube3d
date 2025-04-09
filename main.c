@@ -6,7 +6,7 @@
 /*   By: eburnet <eburnet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 14:18:05 by eburnet           #+#    #+#             */
-/*   Updated: 2025/04/08 13:33:15 by eburnet          ###   ########.fr       */
+/*   Updated: 2025/04/09 10:16:39 by eburnet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ int	ft_pars_init(t_data *data, char *argv1)
 	ft_swap(data);
 	data->mlx = mlx_init();
 	if (data->mlx == NULL)
-		return (ft_close(data), ft_error("mlx init failed"));
+		return (ft_error("mlx init failed"), ft_close(data), 1);
 	data->mlx_win = mlx_new_window(data->mlx, data->screen_width,
 			data->screen_height, "Cube3d");
 	if (data->mlx_win == NULL)
-		return (ft_close(data), ft_error("mlx new window failed"));
+		return (ft_error("mlx new window failed"), ft_close(data), 1);
 	return (0);
 }
 
@@ -102,11 +102,11 @@ int	main(int argc, char *argv[])
 	mlx_hook(data.mlx_win, 17, 0, ft_x_close, &data);
 	data.img = mlx_new_image(data.mlx, data.screen_width, data.screen_height);
 	if (data.img == NULL)
-		return (ft_close(&data), ft_error("mlx new image failed"));
+		return (ft_error("mlx new image failed"), ft_close(&data), 1);
 	data.addr = (uint32_t *)mlx_get_data_addr(data.img, &data.bpp,
 			&data.line_length, &data.endian);
 	if (data.img == NULL)
-		return (ft_close(&data), ft_error("mlx get data address failed"));
+		return (ft_error("mlx get data address failed"), ft_close(&data), 1);
 	if (ft_init_image(&data, 0) == 1)
 		return (ft_close(&data), 1);
 	mlx_loop_hook(data.mlx, ft_raycast, &data);
